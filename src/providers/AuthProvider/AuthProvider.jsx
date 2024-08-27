@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from "../../firebase/firebase.init";
+import axios from 'axios';
 
 
 const auth = getAuth(app);
@@ -34,6 +35,20 @@ const AuthProvider = ({ children }) => {
         })
     }
 
+    const saveUser = async (user) => {
+        const currentUser = {
+            email: user?.email,
+            fullName: user?.displayName,
+            image: user?.photoURL,
+            role: "guest",
+            status: "verified",
+            membership: "bronze",
+        }
+
+        const { data } = await axios.put(`${import.meta.env.VITE_api_url}/user`, currentUser);
+        return data;
+    }
+
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
@@ -42,6 +57,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            saveUser(currentUser)
             setLoading(false);
         })
         return () => {

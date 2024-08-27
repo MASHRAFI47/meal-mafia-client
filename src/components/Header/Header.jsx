@@ -3,7 +3,7 @@ import Logo from '../../assets/images/logo.png'
 import useAuth from '../../hooks/useAuth'
 
 const Header = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const links = <>
         <li><NavLink to={'/'}><h3 className='font-semibold text-white'>Home</h3></NavLink></li>
         <li><NavLink to={'/meals'}><h3 className='font-semibold text-white'>Meals</h3></NavLink></li>
@@ -67,7 +67,7 @@ const Header = () => {
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li onClick={logOut}><a>Logout</a></li>
                                 </ul>
                             </div>
                             :

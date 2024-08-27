@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 //images
 import googleLogo from "../../assets/images/googleLogo.png"
 //icons
@@ -9,6 +9,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+    const navigate = useNavigate();
     const { signInUser } = useAuth();
     const [showPass, setShowPass] = useState(false);
     const {
@@ -22,6 +23,7 @@ const Login = () => {
         signInUser(email, password)
             .then((result) => {
                 console.log(result.user);
+                navigate("/");
             })
     }
 
