@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import googleLogo from "../../assets/images/googleLogo.png"
 
 const Login = () => {
     const {
@@ -42,7 +43,7 @@ const Login = () => {
                     </div>
                 </form>
 
-                <p className="text-center mb-6">New User? <Link className="hover:text-orange-400 transition duration-300">Register now</Link></p>
+                <p className="text-center mb-6">New User? <Link to={'/register'} className="hover:text-orange-400 transition duration-300"><span className="font-semibold">Register now</span></Link></p>
             </div>
         </div>
     )

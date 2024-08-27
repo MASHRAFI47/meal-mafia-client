@@ -3,11 +3,14 @@ import Logo from '../../assets/images/logo.png'
 
 const Header = () => {
     const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'/'}><h3 className='font-semibold text-white'>Home</h3></NavLink></li>
+        <li><NavLink to={'/meals'}><h3 className='font-semibold text-white'>Meals</h3></NavLink></li>
+        <li><NavLink to={'/upcoming'}><h3 className='font-semibold text-white'>Upcoming</h3></NavLink></li>
+        <li><NavLink to={'/checkout'}><h3 className='font-semibold text-white'>Checkout</h3></NavLink></li>
     </>
 
     return (
-        <div className="bg-orange-600">
+        <div className="bg-[#17161C]">
             <div className="navbar container mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -33,7 +36,7 @@ const Header = () => {
                     </div>
 
                     <Link to={'/'}>
-                        <img src={Logo} className='w-24' alt="" />
+                        <img src={Logo} className='w-20' alt="" />
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -42,7 +45,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <Link className='btn bg-green-500 hover:bg-green-400 border-none text-white' to={'/login'}>Sign In</Link>
                 </div>
             </div>
         </div>
