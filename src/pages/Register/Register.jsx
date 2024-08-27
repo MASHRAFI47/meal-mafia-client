@@ -73,7 +73,7 @@ const Register = () => {
                         <button className="btn flex items-center"> <img src={googleLogo} className="w-4" alt="" /> Continue with Google</button>
                     </div>
 
-                    <p className="text-center mb-6">Already a user? <Link to={'/register'} className="hover:text-orange-400 transition duration-300"><span className="font-semibold">Login now</span></Link></p>
+                    <p className="text-center mb-6">Already a user? <Link to={'/login'} className="hover:text-orange-400 transition duration-300"><span className="font-semibold">Login now</span></Link></p>
                 </div>
             </div>
         </div>
