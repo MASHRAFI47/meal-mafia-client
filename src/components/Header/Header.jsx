@@ -1,7 +1,9 @@
 import { Link, NavLink } from 'react-router-dom'
 import Logo from '../../assets/images/logo.png'
+import useAuth from '../../hooks/useAuth'
 
 const Header = () => {
+    const { user } = useAuth();
     const links = <>
         <li><NavLink to={'/'}><h3 className='font-semibold text-white'>Home</h3></NavLink></li>
         <li><NavLink to={'/meals'}><h3 className='font-semibold text-white'>Meals</h3></NavLink></li>
@@ -45,7 +47,32 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link className='btn bg-green-500 hover:bg-green-400 border-none text-white' to={'/login'}>Sign In</Link>
+                    {
+                        user ?
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img
+                                            alt="Tailwind CSS Navbar component"
+                                            src={user?.photoURL} />
+                                    </div>
+                                </div>
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><a>Logout</a></li>
+                                </ul>
+                            </div>
+                            :
+                            <Link className='btn bg-green-500 hover:bg-green-400 border-none text-white' to={'/login'}>Sign In</Link>
+                    }
                 </div>
             </div>
         </div>

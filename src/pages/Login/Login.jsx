@@ -6,8 +6,10 @@ import googleLogo from "../../assets/images/googleLogo.png"
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+    const { signInUser } = useAuth();
     const [showPass, setShowPass] = useState(false);
     const {
         register,
@@ -16,7 +18,11 @@ const Login = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data)
+        const { email, password } = data;
+        signInUser(email, password)
+            .then((result) => {
+                console.log(result.user);
+            })
     }
 
     return (

@@ -36,7 +36,7 @@ const Register = () => {
                         })
                 })
         } catch (error) {
-            console.log(error.message)
+            toast.error(error.message)
         }
 
     }
@@ -53,7 +53,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Full Name</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" {...register("fullName", { required: true })} />
+                            <input type="text" placeholder="email" className="input input-bordered" {...register("fullName", { required: true })} />
                             {errors.fullName && <span className="text-red-600">This field is required</span>}
                         </div>
                         <div className="form-control">
