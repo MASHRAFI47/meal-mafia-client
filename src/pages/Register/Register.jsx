@@ -1,23 +1,44 @@
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 //images
 import googleLogo from "../../assets/images/googleLogo.png"
 //icons
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import imageUpload from "../../hooks/imageUpload";
+import toast from "react-hot-toast";
 
 
 const Register = () => {
-    const [showPass, setShowPass] = useState(false)
+    const navigate = useNavigate();
+    const [showPass, setShowPass] = useState(false);
+    const { createUser, updateUser } = useAuth();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        const { email, password, fullName, image } = data;
+        const displayImage = image[0];
+
+        try {
+            const photo = await imageUpload(displayImage);
+            createUser(email, password)
+                .then(() => {
+                    updateUser(fullName, photo)
+                        .then(() => {
+                            toast.success("Registration Successful");
+                            navigate("/");
+                        })
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+
     }
     return (
         <div>
@@ -53,7 +74,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type={showPass ? "text" : "password"} placeholder="password" className="input input-bordered" {...register("password", { required: true })} />
+                            <input type={showPass ? "text" : "password"} placeholder="password" autoComplete="on" className="input input-bordered" {...register("password", { required: true })} />
                             <span className="mt-0 mr-0 mb-0 ml-auto relative right-4 bottom-8" onClick={() => setShowPass(!showPass)}>
                                 {
                                     showPass ? <FaEye /> : <FaEyeSlash />
