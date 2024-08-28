@@ -46,7 +46,7 @@ const Header = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end relative z-[1000]">
                     {
                         user ?
                             <div className="dropdown dropdown-end">
