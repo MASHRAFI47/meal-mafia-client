@@ -4,11 +4,13 @@ import Sidebar from "../components/Sidebar/Sidebar"
 const DashboardLayout = () => {
     return (
         <div className="flex">
-            <div>
+            <div className="w-64 bg-blue-600">
                 <Sidebar />
             </div>
-            <div>
-                <Outlet />
+            <div className="flex-1">
+                <div className="p-5">
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

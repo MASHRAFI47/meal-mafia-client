@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Statistics from "../pages/Dashboard/Guest/Statistics";
+import AddMeal from "../components/Dashboard/Menu/AddMeal";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +33,11 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Statistics />
-            }
+            },
+            {
+                path: "add-meal",
+                element: <AddMeal />
+            },
         ]
     }
 ]);
