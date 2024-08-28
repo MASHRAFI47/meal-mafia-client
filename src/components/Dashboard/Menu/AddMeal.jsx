@@ -1,18 +1,41 @@
 import { useForm } from "react-hook-form"
 import useAuth from "../../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
+import toast from "react-hot-toast";
+import imageUpload from "../../../hooks/imageUpload";
 
 const AddMeal = () => {
-    const {user} = useAuth();
+    const axiosCommon = useAxiosCommon();
+    const { user } = useAuth();
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
 
+    const { mutateAsync } = useMutation({
+        mutationFn: async (mealData) => {
+            const { data } = await axiosCommon.post("/meals", mealData);
+            return data;
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success("Meal Data Has Been Inserted");
+        }
+    })
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const {title, category, image, ingredients, description, price, rating, likes, reviews, adminEmail, adminName} = data;
+        const displayImage = image[0];
+
+        const picture = await imageUpload(displayImage);
+
+        mutateAsync({title, category, image: picture, ingredients, description, price, rating, likes, reviews, adminEmail, adminName});
+
+        reset();
     }
 
     return (
@@ -65,8 +88,8 @@ const AddMeal = () => {
                         <label className="label">
                             <span className="label-text">Description*</span>
                         </label>
-                        <textarea className="textarea textarea-bordered" placeholder="description..." {...register("ingredients", { required: true })}></textarea>
-                        {errors.ingredients && <span className="text-red-600">This field is required</span>}
+                        <textarea className="textarea textarea-bordered" placeholder="description..." {...register("description", { required: true })}></textarea>
+                        {errors.description && <span className="text-red-600">This field is required</span>}
                     </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
