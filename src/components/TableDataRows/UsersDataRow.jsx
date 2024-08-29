@@ -47,7 +47,7 @@ const UsersDataRow = ({ user, refetch }) => {
             <td>{user?.fullName}</td>
             <td>{user?.email}</td>
             <td>{user?.role}</td>
-            <td><button onClick={() => handleMakeAdmin(user?._id)} className='bg-green-500 p-2 rounded-xl font-semibold text-white'>Make Admin</button></td>
+            <td>{user?.role === 'admin' ? "Already an admin" : <button onClick={() => handleMakeAdmin(user?._id)} className='bg-green-500 p-2 rounded-xl font-semibold text-white'>Make Admin</button>}</td>
         </tr>
     )
 }
