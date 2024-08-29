@@ -1,5 +1,23 @@
+import { useQuery } from "@tanstack/react-query"
+import useAxiosCommon from "../../../hooks/useAxiosCommon"
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const ManageUsers = () => {
+
+    const axiosCommon = useAxiosCommon();
+
+    const { data: users, isLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const { data } = await axiosCommon.get("/users")
+            return data;
+        }
+    })
+
+    if(isLoading) return <LoadingSpinner />
+
+    console.log(users)
+
     return (
         <div>
             <div className="overflow-x-auto">

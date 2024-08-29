@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Statistics from "../pages/Dashboard/Guest/Statistics";
 import AddMeal from "../components/Dashboard/Menu/AddMeal";
+import ManageUsers from "../components/Dashboard/Menu/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             {
                 path: "add-meal",
                 element: <AddMeal />
+            },
+            {
+                path: "manage-users",
+                element: <ManageUsers />
             },
         ]
     }
