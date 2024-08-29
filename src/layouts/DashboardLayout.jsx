@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar/Sidebar"
 
 const DashboardLayout = () => {
     return (
-        <div className="flex">
+        <div className="block md:flex">
             <div className="w-64 bg-blue-600">
                 <Sidebar />
             </div>
