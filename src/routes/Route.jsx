@@ -7,6 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Statistics from "../pages/Dashboard/Guest/Statistics";
 import AddMeal from "../components/Dashboard/Menu/AddMeal";
 import ManageUsers from "../components/Dashboard/Menu/ManageUsers";
+import Meals from "../pages/Meals/Meals";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/meals",
+                element: <Meals />,
             },
         ],
     },
