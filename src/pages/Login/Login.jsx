@@ -7,6 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -24,6 +25,11 @@ const Login = () => {
             .then((result) => {
                 console.log(result.user);
                 navigate("/");
+                const user = { email }
+                axios.post(`${import.meta.env.VITE_api_url}/jwt`, user, {
+                    withCredentials: true
+                })
+                    .then(res => console.log(res.data))
             })
     }
 
