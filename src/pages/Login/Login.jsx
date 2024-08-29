@@ -8,6 +8,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -23,13 +24,18 @@ const Login = () => {
         const { email, password } = data;
         signInUser(email, password)
             .then((result) => {
-                console.log(result.user);
+                toast.success("Sign In Successful");
                 navigate("/");
                 const user = { email }
                 axios.post(`${import.meta.env.VITE_api_url}/jwt`, user, {
                     withCredentials: true
                 })
                     .then(res => console.log(res.data))
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message)
+                toast.error("Invalid email or password")
             })
     }
 
