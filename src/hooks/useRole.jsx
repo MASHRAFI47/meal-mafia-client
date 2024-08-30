@@ -11,7 +11,7 @@ const useRole = () => {
         queryKey: ['role', user?.email],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            const { data } = await axiosCommon.get(`/user/${user?.email}`)
+            const { data } = await axiosCommon.get(`/user/role/${user?.email}`)
             return data.role
         }
     })

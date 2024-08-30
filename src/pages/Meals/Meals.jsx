@@ -1,7 +1,10 @@
 import queryString from 'query-string';
 import { useNavigate, useSearchParams } from "react-router-dom"
+import useRole from '../../hooks/useRole';
 
 const Meals = () => {
+    const [role] = useRole();
+    console.log(role)
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
 
