@@ -8,6 +8,7 @@ import Statistics from "../pages/Dashboard/Guest/Statistics";
 import AddMeal from "../components/Dashboard/Menu/AddMeal";
 import ManageUsers from "../components/Dashboard/Menu/ManageUsers";
 import Meals from "../pages/Meals/Meals";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/meals",
-                element: <Meals />,
+                element: <PrivateRoute><Meals /></PrivateRoute>,
             },
         ],
     },
