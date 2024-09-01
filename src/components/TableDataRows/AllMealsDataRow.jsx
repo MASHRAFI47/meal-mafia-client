@@ -25,7 +25,7 @@ const AllMealsRow = ({ meal }) => {
             <td>
                 {meal?.adminName}
             </td>
-            <td>
+            <td className="w-auto md:w-96">
                 {meal?.reviews}
             </td>
             <th className="flex gap-2 justify-center">
