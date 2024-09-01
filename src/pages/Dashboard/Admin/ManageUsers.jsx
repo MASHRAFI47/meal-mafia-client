@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import useAxiosCommon from "../../../hooks/useAxiosCommon"
-import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
-import UsersDataRow from "../../TableDataRows/UsersDataRow";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import UsersDataRow from "../../../components/TableDataRows/UsersDataRow";
 
 
 const ManageUsers = () => {
