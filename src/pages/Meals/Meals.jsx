@@ -1,16 +1,13 @@
-import queryString from 'query-string';
 import { useNavigate, useSearchParams } from "react-router-dom"
 import useRole from '../../hooks/useRole';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import MealCards from "../../components/Cards/MealCards/MealCards";
 
 const Meals = () => {
     const axiosCommon = useAxiosCommon();
-    const [role] = useRole();
-    console.log(role)
     const navigate = useNavigate();
-    const [params, setParams] = useSearchParams();
 
 
     const { data: meals, isLoading } = useQuery({
@@ -21,26 +18,16 @@ const Meals = () => {
         }
     })
 
-    if(isLoading) return <LoadingSpinner />
-
-    console.log(meals)
+    if (isLoading) return <LoadingSpinner />
 
 
-    const handleClick = () => {
-        let currentQuery = { category: "hi" }
-
-        console.log(currentQuery)
-
-        const url = queryString.stringifyUrl({
-            url: '/meals',
-            query: currentQuery
-        })
-
-        navigate(url);
-    }
     return (
-        <div onClick={handleClick}>
-            <div>hi</div>
+        <div className="py-10 container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {
+                    meals?.map(meal => <MealCards meal={meal} />)
+                }
+            </div>
         </div>
     )
 }

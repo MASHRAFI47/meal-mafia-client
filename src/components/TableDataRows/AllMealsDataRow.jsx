@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useMutation } from "@tanstack/react-query";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -6,7 +7,7 @@ import toast from "react-hot-toast";
 
 
 
-const AllMealsRow = ({ meal, refetch }) => {
+const AllMealsDataRow = ({ meal, refetch }) => {
     const axiosSecure = useAxiosSecure();
 
     const { mutateAsync } = useMutation({
@@ -57,4 +58,9 @@ const AllMealsRow = ({ meal, refetch }) => {
     )
 }
 
-export default AllMealsRow
+AllMealsDataRow.propTypes = {
+    meal: PropTypes.object,
+    refetch: PropTypes.func
+}
+
+export default AllMealsDataRow
