@@ -1,10 +1,30 @@
+import { useMutation } from "@tanstack/react-query";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 
-const AllMealsRow = ({ meal }) => {
-    console.log(meal)
+const AllMealsRow = ({ meal, refetch }) => {
+    const axiosSecure = useAxiosSecure();
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (mealId) => {
+            const { data } = await axiosSecure.delete(`/meal/${mealId}`);
+            return data;
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success("Meal data deleted successfully");
+            refetch()
+        }
+    })
+
+    const handleDeleteMeal = (mealId) => {
+        mutateAsync(mealId)
+    }
+
     return (
         <tr>
             <td>
@@ -30,7 +50,7 @@ const AllMealsRow = ({ meal }) => {
             </td>
             <th className="flex gap-2 justify-center">
                 <button className="btn btn-success text-white p-2 btn-md"><FaRegEdit size={20} /> </button>
-                <button className="btn btn-error text-white p-2 btn-md"><FaRegTrashCan size={20} /> </button>
+                <button className="btn btn-error text-white p-2 btn-md" onClick={() => handleDeleteMeal(meal?._id)}><FaRegTrashCan size={20} /> </button>
                 <button className="btn btn-md btn-primary">View</button>
             </th>
         </tr>

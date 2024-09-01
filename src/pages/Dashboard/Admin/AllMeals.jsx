@@ -6,7 +6,7 @@ import AllMealsDataRow from "../../../components/TableDataRows/AllMealsDataRow";
 const AllMeals = () => {
     const axiosCommon = useAxiosCommon();
 
-    const { data: meals, isLoading } = useQuery({
+    const { data: meals, isLoading, refetch } = useQuery({
         queryKey: ['meals'],
         queryFn: async () => {
             const { data } = await axiosCommon.get("/meals")
@@ -33,7 +33,7 @@ const AllMeals = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            meals?.map(meal => <AllMealsDataRow meal={meal} />)
+                            meals?.map(meal => <AllMealsDataRow meal={meal} refetch={refetch} />)
                         }
                     </tbody>
                 </table>
