@@ -5,11 +5,11 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Statistics from "../pages/Dashboard/Guest/Statistics";
-import AddMeal from "../components/Dashboard/Menu/AddMeal";
 import ManageUsers from "../components/Dashboard/Menu/ManageUsers";
 import Meals from "../pages/Meals/Meals";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import AddMeal from "../pages/Dashboard/Admin/AddMeal";
 
 export const router = createBrowserRouter([
     {
