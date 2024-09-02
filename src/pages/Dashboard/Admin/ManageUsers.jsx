@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
-import useAxiosCommon from "../../../hooks/useAxiosCommon"
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import UsersDataRow from "../../../components/TableDataRows/UsersDataRow";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const ManageUsers = () => {
 
-    const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
 
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const { data } = await axiosCommon.get("/users")
+            const { data } = await axiosSecure.get("/users")
             return data;
         }
     })
