@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import useAxiosCommon from "../../../hooks/useAxiosCommon"
-import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-import AllMealsDataRow from "../../../components/TableDataRows/AllMealsDataRow";
+import useAxiosCommon from "../../../../hooks/useAxiosCommon"
+import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
+import AllMealsDataRow from "../../../../components/TableDataRows/AllMealsDataRow";
 
 const AllMeals = () => {
     const axiosCommon = useAxiosCommon();

@@ -10,7 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AddMeal from "../pages/Dashboard/Admin/AddMeal";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
-import AllMeals from "../pages/Dashboard/Admin/AllMeals";
+import AllMeals from "../pages/Dashboard/Admin/AllMeals/AllMeals";
 
 export const router = createBrowserRouter([
     {

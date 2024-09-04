@@ -10,7 +10,6 @@ const Meals = () => {
     const [sort, setSort] = useState("")
     console.log(sort)
     const axiosCommon = useAxiosCommon();
-    const navigate = useNavigate();
 
 
     const { data: meals, isLoading } = useQuery({
