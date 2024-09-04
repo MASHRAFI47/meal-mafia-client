@@ -1,30 +1,50 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
 
 const UpdateMeals = () => {
+    const { id } = useParams();
 
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        defaultValues: async () => {
+            const response = await fetch(`${import.meta.env.VITE_api_url}/meals/${id}`);
+            const data = await response.json();
+            return {
+                title: data?.title,
+                category: data?.category,
+                ingredients: data?.ingredients,
+                description: data?.description,
+                price: data?.price,
+                rating: data?.rating,
+                likes: data?.likes,
+                reviews: data?.reviews
+            }
+        }
+    });
 
-
-    const { mutateAsync } = useMutation({
-        mutationFn: async (mealData) => {
-            const { data } = await axiosSecure.post("/meals", mealData);
-            return data;
-        },
-        onSuccess: (data) => {
-            console.log(data);
-            toast.success("Meal Data Has Been Inserted");
+    const { data: meal, isLoading } = useQuery({
+        queryKey: ['meal', user?.email],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/meals/${id}`)
+            return data
         }
     })
+
+    if (isLoading) return <LoadingSpinner />
+
+
+
 
     const onSubmit = async (data) => {
         const { title, category, image, ingredients, description, price, rating, likes, reviews, adminEmail, adminName } = data;
@@ -43,7 +63,7 @@ const UpdateMeals = () => {
             <div className="flex justify-center items-center my-10">
                 <div className="card bg-base-100 w-full max-w-3xl shrink-0 shadow-2xl border">
                     <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-                        <h1 className="text-2xl text-center font-semibold">Add Meal</h1>
+                        <h1 className="text-2xl text-center font-semibold">Update Meal</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Title*</span>
