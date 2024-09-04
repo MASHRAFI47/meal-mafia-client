@@ -33,7 +33,7 @@ const AddMeal = () => {
 
         const picture = await imageUpload(displayImage);
 
-        mutateAsync({title, category, image: picture, ingredients, description, price, rating, likes, reviews, adminEmail, adminName});
+        mutateAsync({title, category, image: picture, ingredients, description, price: Number(price), rating: Number(rating), likes: Number(likes), reviews, adminEmail, adminName});
 
         reset();
     }
