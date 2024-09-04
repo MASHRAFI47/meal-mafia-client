@@ -45,8 +45,8 @@ const UpdateMeals = () => {
 
 
     const { mutateAsync } = useMutation({
-        mutationFn: async () => {
-            const { data } = await axiosSecure.put(`/meals/${id}`)
+        mutationFn: async (mealData) => {
+            const { data } = await axiosSecure.put(`/meals/${id}`, mealData)
             return data
         },
         onSuccess: (data) => {
@@ -71,7 +71,7 @@ const UpdateMeals = () => {
 
     if (isLoading) return <LoadingSpinner />
 
-    
+
     return (
         <div>
             <div className="flex justify-center items-center my-10">
