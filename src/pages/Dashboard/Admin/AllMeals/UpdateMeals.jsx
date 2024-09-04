@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
+import toast from "react-hot-toast";
+import imageUpload from "../../../../hooks/imageUpload";
 
 const UpdateMeals = () => {
     const { id } = useParams();
@@ -41,7 +43,17 @@ const UpdateMeals = () => {
         }
     })
 
-    if (isLoading) return <LoadingSpinner />
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async () => {
+            const { data } = await axiosSecure.put(`/meals/${id}`)
+            return data
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success("Meal updated successfully");
+        }
+    })
 
 
 
@@ -57,7 +69,9 @@ const UpdateMeals = () => {
         reset();
     }
 
+    if (isLoading) return <LoadingSpinner />
 
+    
     return (
         <div>
             <div className="flex justify-center items-center my-10">
@@ -183,7 +197,7 @@ const UpdateMeals = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <button className="btn btn-success">Add Meal</button>
+                            <button className="btn btn-success">Update Meal</button>
                         </div>
                     </form>
                 </div>
