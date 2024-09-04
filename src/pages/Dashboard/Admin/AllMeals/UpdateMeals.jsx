@@ -1,5 +1,43 @@
+import { useForm } from "react-hook-form";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
 
 const UpdateMeals = () => {
+
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
+
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (mealData) => {
+            const { data } = await axiosSecure.post("/meals", mealData);
+            return data;
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success("Meal Data Has Been Inserted");
+        }
+    })
+
+    const onSubmit = async (data) => {
+        const { title, category, image, ingredients, description, price, rating, likes, reviews, adminEmail, adminName } = data;
+        const displayImage = image[0];
+
+        const picture = await imageUpload(displayImage);
+
+        mutateAsync({ title, category, image: picture, ingredients, description, price: Number(price), rating: Number(rating), likes: Number(likes), reviews, adminEmail, adminName });
+
+        reset();
+    }
+
+
     return (
         <div>
             <div className="flex justify-center items-center my-10">
