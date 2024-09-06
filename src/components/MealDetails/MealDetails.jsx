@@ -1,5 +1,7 @@
+import { useParams } from "react-router-dom"
 
-const MealDetails = () => {
+const MealDetails = ({id}) => {
+    const id = useParams();
     return (
         <div>MealDetails</div>
     )
