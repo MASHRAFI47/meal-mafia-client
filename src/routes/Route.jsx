@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
                 path: "/meals",
                 element: <Meals />,
             },
+            {
+                path: "meal-details/:id",
+                element: <PrivateRoute><MealDetails /></PrivateRoute>
+            },
         ],
     },
     {
@@ -56,10 +60,6 @@ export const router = createBrowserRouter([
             {
                 path: "all-meals",
                 element: <AdminRoute><AllMeals /></AdminRoute>
-            },
-            {
-                path: "meal-details/:id",
-                element: <PrivateRoute><MealDetails /></PrivateRoute>
             },
             {
                 path: "update-meals/:id",
