@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-const MealDetails = ({ id }) => {
+const MealDetails = () => {
     const axiosCommon = useAxiosCommon();
     const id = useParams();
 
@@ -17,8 +17,12 @@ const MealDetails = ({ id }) => {
 
     if(isLoading) return <LoadingSpinner />
 
+    console.log(meal)
+
     return (
-        <div>MealDetails</div>
+        <div>
+            
+        </div>
     )
 }
 
