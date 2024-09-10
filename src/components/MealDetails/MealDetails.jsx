@@ -24,6 +24,7 @@ const MealDetails = () => {
     return (
         <div>
             {meal?.title}
+            {meal?.image}
         </div>
     )
 }
