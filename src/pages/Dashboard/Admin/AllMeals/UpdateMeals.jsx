@@ -20,7 +20,7 @@ const UpdateMeals = () => {
         formState: { errors },
     } = useForm({
         defaultValues: async () => {
-            const response = await fetch(`${import.meta.env.VITE_api_url}/meals/${id}`);
+            const response = await fetch(`${import.meta.env.VITE_api_url}/meal/${id}`);
             const data = await response.json();
             return {
                 title: data?.title,
@@ -62,7 +62,12 @@ const UpdateMeals = () => {
         const { title, category, image, ingredients, description, price, rating, likes, reviews, adminEmail, adminName } = data;
         const displayImage = image[0];
 
-        const picture = await imageUpload(displayImage);
+        let imageUrl;
+        if(displayImage) {
+            imageUrl = await imageUpload(displayImage)
+        }
+
+        const picture = imageUrl ? imageUrl : meal?.image;
 
         mutateAsync({ title, category, image: picture, ingredients, description, price: Number(price), rating: Number(rating), likes: Number(likes), reviews, adminEmail, adminName });
 
@@ -105,8 +110,7 @@ const UpdateMeals = () => {
                                     <span className="label-text">Image*</span>
                                 </label>
 
-                                <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("image", { required: true })} />
-                                {errors.image && <span className="text-red-600">This field is required</span>}
+                                <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("image")} />
                             </div>
                         </div>
 
