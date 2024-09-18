@@ -53,7 +53,7 @@ const AllMealsDataRow = ({ meal, refetch }) => {
             <th className="flex gap-2 justify-center">
                 <Link to={`../update-meals/${meal?._id}`} className="btn btn-success text-white p-2 btn-md"><FaRegEdit size={20} /> </Link>
                 <button className="btn btn-error text-white p-2 btn-md" onClick={() => handleDeleteMeal(meal?._id)}><FaRegTrashCan size={20} /> </button>
-                <button className="btn btn-md btn-primary">View</button>
+                <Link to={`../../meal-details/${meal?._id}`} className="btn btn-md btn-primary">View</Link>
             </th>
         </tr>
     )
